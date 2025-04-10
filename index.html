@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide pratique pour la grève</title>
+    <style>
+        :root {
+            --primary: #134E87;
+            --secondary: #EBE585;
+            --accent: #E54B4B;
+            --light: #F8F9FA;
+            --dark: #1A1A1A;
+            --gray: #6C757D;
+            --valid: #28a745;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            background-color: var(--light);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), #0D3A5F);
+            color: white;
+            padding: 5rem 1.5rem 7rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: -4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: var(--secondary);
+            opacity: 0.3;
+            transform: skewY(-2deg);
+            transform-origin: bottom left;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin: 0 0 1rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+        }
+
+        .info-banner {
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .info-banner p {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .info-banner .btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        /* .info-banner .btn:hover {
+            background-color: #0D3A5F;
+            transform: translateY(-1px);
+        } */
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .grid-2{
+            grid-template-columns: 1fr 2fr;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            margin: 0 0 1.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .card h3::after, .checklist h3::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 3px;
+        }
+        
+        .emergency h3::after, .checklist h3::after {
+            background: var(--accent);
+        }
+
+        .matos h3::after{
+            background: var(--valid);
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 0 1.5rem;
+        }
+        
+        li {
+            padding: 0.6rem 0;
+            position: relative;
+            padding-left: 1.8rem;
+            color: var(--gray);
+        }
+        
+        li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            width: 8px;
+            height: 8px;
+            background: var(--secondary);
+            border-radius: 50%;
+        }
+
+        .matos-li::before{
+            background: var(--valid);
+        }
+        
+        .emergency li::before {
+            background: var(--accent);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(19, 78, 135, 0.2);
+        }
+        
+        .btn:hover {
+            background: #0D3A5F;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(19, 78, 135, 0.3);
+            cursor: pointer;
+        }
+        
+        .btn svg {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover svg {
+            transform: translateX(3px);
+        }
+        
+        .emergency .btn {
+            background: var(--accent);
+            box-shadow: 0 4px 12px rgba(229, 75, 75, 0.2);
+        }
+        
+        .emergency .btn:hover {
+            background: #D14040;
+            box-shadow: 0 6px 16px rgba(229, 75, 75, 0.3);
+        }
+
+        /* Styles pour le contenu détaillé */
+        .detail-view {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .detail-view.active {
+            display: block;
+        }
+
+        .detail-view h2 {
+            color: var(--primary);
+            margin-top: 0;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .back-btn {
+            background: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+        }
+
+        /* Contenu spécifique aux sections détaillées */
+                /* [Styles précédents inchangés jusqu'à .detail-content] */
+
+        /* Nouveaux styles pour la section Inspiration */
+        .theme-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .theme-btn {
+            background: var(--light);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .theme-btn:hover, .theme-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .ideas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .idea-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .idea-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .do h4:after, .dont h4:after {
+            content:'';
+            display:block;
+            margin:10px 0;
+            width: 40px;
+            height: 3px;
+            border-radius: 3px;
+        }
+        .do h4:after{
+            background: var(--valid);
+        }  
+        .dont h4:after{
+            background: var(--accent);
+        }    
+
+        .idea-card h4 {
+            margin: 0 0 0.5rem;
+            color: var(--primary);
+        }
+
+        .idea-card p {
+            margin: 0 0 1rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .idea-more {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border-bottom: 1px dashed var(--primary);
+            padding-bottom: 2px;
+        }
+
+        .detail-content {
+            display: none;
+        }
+
+        .detail-content.active {
+            display: block;
+        }
+
+        .checklist {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .checklist:hover{
+            cursor: pointer;
+        }
+/*         
+        .checklist::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 12px 12px 0 0;
+        } */
+        
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .checklist h3 {
+            margin: 0 0 2rem;
+            font-size: 1.5rem;
+            color: var(--primary);
+            position:relative;
+        }
+        
+        .checklist h4 {
+            margin: 0 0 1rem;
+            font-size: 1.1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .checklist h4 svg {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: var(--dark);
+            color: white;
+            margin-top: 4rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--secondary);
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, var(--secondary) 0%, var(--secondary) 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                padding: 3rem 1.5rem 5rem;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+
+            .info-banner {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Guide pratique <span class="highlight">grève</span></h1>
+        <p class="tagline">Quelques outils à portée de main</p>
+    </header>
+    
+    <div class="container">
+        <!-- <div class="info-banner">
+            <p>📌 N'oublies pas de regarder la carte des piquets pour savoir où aller</p>
+            <a href="#" class="btn">Voir la carte</a>
+        </div> -->
+
+        <!-- Conteneur principal qui change selon l'état -->
+        <div id="main-view">
+            <div class="card-grid">
+                <!-- Section Urgences -->
+                <div class="card emergency" onclick="showDetail('crisis')">
+                    <h3>Tes droits</h3>
+                <p>Ce que tu peux faire et ce que tu dois éviter</p>
+                    <ul>
+                        <li>Ea id adipisicing enim dolore</li>
+                        <li>Bacon thin crust hand tossed bbq</li>
+                        <li>Irure ipsum anim incididunt philly </li>
+                        <li>Pineapple parmesan</li>
+                    </ul>
+                    <div class="btn">
+                        Plus d'infos
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Section Ressources -->
+                <div class="card matos" onclick="showDetail('resources')">
+                    <h3>Le matériel</h3>
+                    <p>Á imprimer :</p>
+                    <ul class="matos-li">
+                        <li class="matos-li">Flyers</li>
+                        <li class="matos-li">Affiches</li>
+                        <li class="matos-li">Slogan</li>
+                        <li class="matos-li">...</li>
+                    </ul>
+                    <div class="btn">
+                        Plus d'infos
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Section carte -->
+                <div class="card" onclick="window.location.href='https://dagjo90.github.io/picketmaster/'">
+                    <h3>Carte des piquets</h3>
+                    <p>Viens nous rejoindre partout dans Liège !</p>
+                    <ul>
+                        <li>Localisation des piquets</li>
+                        <li>Priorisation</li>
+                        <li>...</li>
+                        <li>...</li>
+                    </ul>
+                    <a href="https://dagjo90.github.io/picketmaster/" class="btn">
+                        Voir la carte
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </a>
+                </div>
+                 
+             
+            </div>
+
+            <!-- Section supplémentaire -->
+            <div class="checklist" onclick="showDetail('ideas')">
+                <h3>Pourquoi faire grève ?</h3>
+                <p>Les attaques du gouvernement par thème</p>
+                <div class="checklist-grid">
+                    <div>
+                        <h4>
+                              <svg  viewBox="0 0 512 512" width="20" height="20"  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M272 96c-78.6 0-145.1 51.5-167.7 122.5c33.6-17 71.5-26.5 111.7-26.5l88 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-16 0-72 0s0 0 0 0c-16.6 0-32.7 1.9-48.3 5.4c-25.9 5.9-49.9 16.4-71.4 30.7c0 0 0 0 0 0C38.3 298.8 0 364.9 0 440l0 16c0 13.3 10.7 24 24 24s24-10.7 24-24l0-16c0-48.7 20.7-92.5 53.8-123.2C121.6 392.3 190.3 448 272 448l1 0c132.1-.7 239-130.9 239-291.4c0-42.6-7.5-83.1-21.1-119.6c-2.6-6.9-12.7-6.6-16.2-.1C455.9 72.1 418.7 96 376 96L272 96z"/></svg>
+                              
+                            Ecologie
+                        </h4>
+                        <ul>
+                            <li>String cheese marinara</li>
+                    <li>Buffalo sauce garlic parmesan</li>
+                    <li>White pizza ham bbq</li>
+                    <li>Lasagna white garlic marinara</li>
+                        </ul>
+                      
+                    </div>
+                    <div>
+                        <h4>
+                            <svg viewBox="0 0 576 512" width="20" height="20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M64 64C28.7 64 0 92.7 0 128L0 384c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64L64 64zm64 320l-64 0 0-64c35.3 0 64 28.7 64 64zM64 192l0-64 64 0c0 35.3-28.7 64-64 64zM448 384c0-35.3 28.7-64 64-64l0 64-64 0zm64-192c-35.3 0-64-28.7-64-64l64 0 0 64zM288 160a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg>
+                            Salaires et pensions
+                        </h4>
+                        <ul>
+                            <li>Garlic parmesan mozzarella</li>
+                    <li>banana peppers red onions</li>
+                    <li>sauce garlic parmesan</li>
+                    <li>cheese party pizza</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>
+
+                            <svg viewBox="0 0 640 512" width="20" height="20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                
+                                <path d="M192 288a112 112 0 1 0 0-224 112 112 0 1 0 0 224zM368 176c0 86.3-62.1 158.1-144 173.1l0 34.9 32 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0 0 32c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-32-32 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l32 0 0-34.9C78.1 334.1 16 262.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176zM344 318c14.6-15.6 26.8-33.4 36-53c18.8 14.4 42.4 23 68 23c61.9 0 112-50.1 112-112s-50.1-112-112-112c-25.6 0-49.1 8.6-68 23c-9.3-19.5-21.5-37.4-36-53C373.1 12.6 409.1 0 448 0c97.2 0 176 78.8 176 176c0 86.3-62.1 158.1-144 173.1l0 34.9 32 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0 0 32c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-32-32 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l32 0 0-34.9c-26.6-4.9-51.1-15.7-72-31.1z"/></svg>
+                            Droits des femmes
+                        </h4>
+                        <ul>
+                            <li>Parmesan ricotta</li>
+                    <li>pesto garlic parmesan</li>
+                    <li>bbq rib sauteed</li>
+                    <li>Anchovies pizza roll</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h4>
+                            <svg viewBox="0 0 512 512" width="20" height="20"  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M270.7 9.7C268.2 3.8 262.4 0 256 0s-12.2 3.8-14.7 9.7L197.2 112.6c-3.4 8-5.2 16.5-5.2 25.2l0 77-144 84L48 280c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 56 0 32 0 24c0 13.3 10.7 24 24 24s24-10.7 24-24l0-8 144 0 0 32.7L133.5 468c-3.5 3-5.5 7.4-5.5 12l0 16c0 8.8 7.2 16 16 16l96 0 0-64c0-8.8 7.2-16 16-16s16 7.2 16 16l0 64 96 0c8.8 0 16-7.2 16-16l0-16c0-4.6-2-9-5.5-12L320 416.7l0-32.7 144 0 0 8c0 13.3 10.7 24 24 24s24-10.7 24-24l0-24 0-32 0-56c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 18.8-144-84 0-77c0-8.7-1.8-17.2-5.2-25.2L270.7 9.7z"/></svg>
+                            Pizza
+                        </h4>
+                        <ul>
+                            <li>Parmesan string cheese</li>
+                            <li>philly chicken pan anchovies</li>
+                            <li>Stuffed bacon thin crust</li>
+                            <li>peppers red onions</li>
+                        
+                        </ul>
+                       
+                    </div> 
+                </div>
+                <div class="btn">
+                    Plus d'infos
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vue détaillée (cachée par défaut) -->
+        <div id="detail-view" class="detail-view">
+            <button onclick="hideDetail()" class="btn back-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Retour
+            </button>
+            
+            <div id="crisis-detail" class="detail-content">
+                <h2>Tes droits - Détails</h2>
+                <h3>Ce que tu peux ou ne peux pas faire</h3>
+                <div class="theme-nav">
+                    <div class="theme-btn active" onclick="filterIdeas('all')">Tous</div>
+                    <div class="theme-btn" onclick="filterIdeas('do')">Ce qui est autorisé</div>
+                    <div class="theme-btn" onclick="filterIdeas('dont')">Ce qu'il faut éviter</div>
+                  
+                </div>
+                <div class="ideas-grid">
+                    <div class="idea-card do" data-theme="do">
+                        <h4>Ce que tu peux faire</h4>
+                        <p>Pan fresh tomatoes mushrooms burnt mouth string cheese marinara. Bbq mayo chicken and bacon onions deep crust anchovies, sauteed onions ricotta peppers NY style garlic sauce personal.</p>
+                    </div>
+                    <div class="idea-card dont" data-theme="dont">
+                        <h4>Ce que tu ne peux pas faire</h4>
+                        <p>Pan fresh tomatoes mushrooms burnt mouth string cheese marinara. Bbq mayo chicken and bacon onions deep crust anchovies, sauteed onions ricotta peppers NY style garlic sauce personal.</p>
+                    </div>
+                    <div class="idea-card do" data-theme="do">
+                        <h4>Ce que tu peux faire</h4>
+                        <p>Pan fresh tomatoes mushrooms burnt mouth string cheese marinara. Bbq mayo chicken and bacon onions deep crust anchovies, sauteed onions ricotta peppers NY style garlic sauce personal.</p>
+                    </div>
+                    <div class="idea-card do" data-theme="do">
+                        <h4>Ce que tu peux faire</h4>
+                        <p>Pan fresh tomatoes mushrooms burnt mouth string cheese marinara. Bbq mayo chicken and bacon onions deep crust anchovies, sauteed onions ricotta peppers NY style garlic sauce personal.</p>
+                    </div>
+                    <div class="idea-card dont" data-theme="dont">
+                        <h4>Ce que tu ne peux pas faire</h4>
+                        <p>Pan fresh tomatoes mushrooms burnt mouth string cheese marinara. Bbq mayo chicken and bacon onions deep crust anchovies, sauteed onions ricotta peppers NY style garlic sauce personal.</p>
+                    </div>
+                    <div class="idea-card do" data-theme="do">
+                        <h4>Ce que tu peux faire</h4>
+                        <p>Pan fresh tomatoes mushrooms burnt mouth string cheese marinara. Bbq mayo chicken and bacon onions deep crust anchovies, sauteed onions ricotta peppers NY style garlic sauce personal.</p>
+                    </div>
+                </div>
+                
+                
+            </div>
+            
+            <div id="resources-detail" class="detail-content">
+                <h2>Le Matériel - Détails</h2>
+                <h3>Documents téléchargeables et imprimables</h3>
+                <div class="ideas-grid">
+                    <div class="idea-card " data-theme="none" >
+                        <h4>Flyer</h4>
+                        <p>Á distribuer sur les piquets</p>
+                        <a href="#" class="btn">Télécharger (PDF)</a>
+                    </div>
+                    <div class="idea-card" data-theme="none">
+                        <h4>Affiche</h4>
+                        <p>A placarder partout</p>
+                        <a href="#" class="btn">Télécharger (PDF)</a>
+                    </div>
+                    <div class="idea-card" data-theme="none">
+                        <h4>Slogans</h4>
+                        <p>Toujours utiles</p>
+                        <a href="#" class="btn">Télécharger (PDF)</a>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div id="ideas-detail" class="detail-content">
+                <h2>Pourquoi lutter ?</h2>
+                <p>Toutes les attaques du gouvernement</p>
+                
+                <!-- Barre de navigation par thème -->
+                <div class="theme-nav">
+                    <div class="theme-btn active" onclick="filterIdeas('all')">Tous</div>
+                    <div class="theme-btn" onclick="filterIdeas('pensions')">Pensions</div>
+                    <div class="theme-btn" onclick="filterIdeas('salaires')">Salaires</div>
+                    <div class="theme-btn" onclick="filterIdeas('femmes')">Droits des femmes</div>
+                    <div class="theme-btn" onclick="filterIdeas('ecologie')">Écologie</div>
+                    <div class="theme-btn" onclick="filterIdeas('seasonal')">Droits LGBT</div>
+                    <div class="theme-btn" onclick="filterIdeas('...')">...</div>
+                </div>
+                
+                <!-- Grille d'idées -->
+                <div class="ideas-grid">
+                    <!-- Idée 1 -->
+                    <div class="idea-card" data-theme="pensions">
+                        <h4>thin crust bianca bacon & tomato pizza</h4>
+                        <p>Parmesan bbq rib peppers, pan spinach pie large meatball. Chicken wing bbq rib hand tossed party.</p>
+                        <a href="#" class="idea-more">Plus d'info</a>
+                    </div>
+                    
+                    <!-- Idée 2 -->
+                    <div class="idea-card" data-theme="pensions salaires">
+                        <h4>Ham onions pineapple thin crust steak</h4>
+                        <p>White pizza white garlic melted cheese burnt mouth sausage pan. Deep crust stuffed crust pineapple, pepperoni mushrooms string cheese bianca hawaiian bbq. Bbq pepperoni pesto green bell peppers white pizza.</p>
+                        <a href="#" class="idea-more">Plus d'info</a>
+                    </div>
+                    
+                    <!-- Idée 3 -->
+                    <div class="idea-card" data-theme="salaires ecologie">
+                        <h4>Pizza burnt mouth pesto thin crust garlic parmesan</h4>
+                        <p>Garlic chicken wing garlic parmesan pepperoni. Meatball thin crust deep crust thin crust garlic sauce bbq rib ricotta pizza.</p>
+                        <a href="#" class="idea-more">Plus d'info</a>
+                    </div>
+                    
+                    <!-- Idée 4 -->
+                    <div class="idea-card" data-theme="femmes">
+                        <h4>White garlic pizza bbq sauce peppers</h4>
+                        <p>Extra sauce buffalo sauce mozzarella personal. Pan bbq sauce pizza roll chicken wing. Extra cheese extra sauce garlic sauce.</p>
+                        <a href="#" class="idea-more">Plus d'info</a>
+                    </div>
+                    
+                    <!-- Idée 5 -->
+                    <div class="idea-card" data-theme="seasonal">
+                        <h4>Beef marinara hand tossed bbq chicken and baconr</h4>
+                        <p>Pie bbq rib pizza roll extra sauce, sausage red onions spinach fresh tomatoes platter NY style extra cheese meat lovers.</p>
+                        <a href="#" class="idea-more">Plus d'info</a>
+                    </div>
+                    
+                    <!-- Idée 6 -->
+                    <div class="idea-card" data-theme="ecologie">
+                        <h4>Pepperoni mushrooms green bell peppers</h4>
+                        <p>Meat lovers red onions hand tossed, pan chicken wing sausage bacon & tomato white pizza melted cheese bbq rib lasagna philly chicken.</p>
+                        <a href="#" class="idea-more">Plus d'info</a>
+                    </div>
+                    
+                    <!-- Idée 7 -->
+                    <div class="idea-card" data-theme="femmes seasonal">
+                        <h4>White garlic string cheese stuffed</h4>
+                        <p>Pineapple pizza mayo, parmesan melted cheese sausage pie pepperoni meatball bacon & tomato.</p>
+                        <a href="#" class="idea-more">Plus d'info</a>
+                    </div>
+                    
+                    <!-- Idée 8 -->
+                    <div class="idea-card" data-theme="salaires">
+                        <h4>Black olives NY style bbq rib</h4>
+                        <p>Fresh tomatoes hawaiian stuffed crust, thin crust philly chicken deep crust ham NY style bacon bianca.</p>
+                        <a href="#" class="idea-more">Plus d'info</a>
+                    </div>
+                    <!-- Idée 9 -->
+                    <div class="idea-card" data-theme="...">
+                        <h4>Mayo string cheese fresh tomatoes pineapple</h4>
+                        <p>Party string cheese onions extra cheese meat lovers NY style garlic mozzarella deep crust peppers chicken garlic parmesan.</p>
+                        <a href="#" class="idea-more">Plus d'info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <footer>
+            <p>Guide pratique pour la grève | CC</p>
+        </footer>
+    
+
+    <script>
+        // Fonction pour afficher le détail d'une section
+        function showDetail(section) {
+            document.querySelectorAll('.idea-card').forEach(el => {
+                el.style.display = 'block';
+            });
+            document.getElementById('main-view').style.display = 'none';
+            document.getElementById('detail-view').classList.add('active');
+            
+            // Masquer tous les contenus détaillés
+            document.querySelectorAll('.detail-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            
+            // Afficher le contenu correspondant
+            document.getElementById(section + '-detail').classList.add('active');
+        }
+        
+        // Fonction pour revenir à la vue principale
+        function hideDetail() {
+            document.getElementById('detail-view').classList.remove('active');
+            document.getElementById('main-view').style.display = 'block';
+        }
+
+          // Nouvelle fonction pour filtrer les idées par thème
+          function filterIdeas(theme) {
+            // Mettre à jour les boutons actifs
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === 'Tous' && theme === 'all') btn.classList.add('active');
+                if (btn.textContent === 'Brise-glace' && theme === 'pensions') btn.classList.add('active');
+                if (btn.textContent === 'Jeux d\'équipe' && theme === 'salaires') btn.classList.add('active');
+                if (btn.textContent === 'Créativité' && theme === 'femmes') btn.classList.add('active');
+                if (btn.textContent === 'Extérieur' && theme === 'ecologie') btn.classList.add('active');
+                if (btn.textContent === 'Saisonnier' && theme === 'seasonal') btn.classList.add('active');
+            });
+
+            // Filtrer les cartes
+            const allCards = document.querySelectorAll('.idea-card');
+            allCards.forEach(card => {
+                if (theme === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const cardThemes = card.getAttribute('data-theme').split(' ');
+                    if (cardThemes.includes(theme) || cardThemes.includes('none') ) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
